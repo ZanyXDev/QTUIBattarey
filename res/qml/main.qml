@@ -77,7 +77,29 @@ QQC2.ApplicationWindow {
     }
 
     // ----- Visual children
-
+    Item {
+        id: mainView
+        anchors.fill: parent
+        Image {
+            anchors.horizontalCenter: parent.horizontalCenter
+            scale: 1.52
+            source: "qrc:/res/images/title.png"
+        }
+        QUItBattery {
+            id: battery
+            anchors.centerIn: parent
+            value: slider.value
+            charging: chargingToggle.checked
+            maxLiquidRotation: liquidToggle.checked ? 50 : 0
+            rotation: -90
+            SequentialAnimation on rotation {
+                running: rotateToggle.checked
+                loops: Animation.Infinite
+                NumberAnimation { to: -120; duration: 2000; easing.type: Easing.InOutQuad }
+                NumberAnimation { to: -70; duration: 1000; easing.type: Easing.InOutQuad }
+            }
+        }
+    }
     //  ----- non visual children
     Settings {
         id: mSettings
