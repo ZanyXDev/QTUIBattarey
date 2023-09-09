@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/images/arrows.png</file>
+        <file>res/images/background2.jpg</file>
+        <file>res/images/bar_level2.png</file>
+        <file>res/images/battery2.png</file>        
+        <file>res/images/battery_bar.png</file>
+        <file>res/images/glass.png</file>
+        <file>res/images/handle.png</file>
+        <file>res/images/lightning.png</file>
+        <file>res/images/particle.png</file>
+        <file>res/images/plug.png</file>
+        <file>res/images/rotate.png</file>
+        <file>res/images/title.png</file>
+        <file>res/images/toggle.png</file>       
+    </qresource>
+</RCC>
