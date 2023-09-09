@@ -1,9 +1,9 @@
-import QtQuick 2.0
+import QtQuick 2.15
 
 Item {
     id: root
-    width: 200
-    height: 112
+    width: 200 * DevicePixelRatio
+    height: 112 * DevicePixelRatio
 
     property real value: 0
     property real maximum: 1
@@ -11,32 +11,38 @@ Item {
     property int xMax: width - handle.width - 4
     property alias text: sliderText.text
 
-    onValueChanged: updatePos();
-    onXMaxChanged: updatePos();
-    onMinimumChanged: updatePos();
+    onValueChanged: updatePos()
+    onXMaxChanged: updatePos()
+    onMinimumChanged: updatePos()
 
     function updatePos() {
         if (maximum > minimum) {
-            var pos = 2 + (value - minimum) * root.xMax / (maximum - minimum);
-            pos = Math.min(pos, width - handle.width - 2);
-            pos = Math.max(pos, 2);
-            handle.x = pos;
+            var pos = 2 + (value - minimum) * root.xMax / (maximum - minimum)
+            pos = Math.min(pos, width - handle.width - 2)
+            pos = Math.max(pos, 2)
+            handle.x = pos
         } else {
-            handle.x = 2;
+            handle.x = 2
         }
     }
 
     Rectangle {
         id: backgroundBar
         anchors.fill: parent
-        anchors.topMargin: 40
-        anchors.bottomMargin: 40
-        border.width: 1
+        anchors.topMargin: 40 * DevicePixelRatio
+        anchors.bottomMargin: 40 * DevicePixelRatio
+        border.width: 1 * DevicePixelRatio
         border.color: "white"
         opacity: 0.2
         gradient: Gradient {
-            GradientStop { position: 0.0; color: "lightgray" }
-            GradientStop { position: 1.0; color: "gray" }
+            GradientStop {
+                position: 0.0
+                color: "lightgray"
+            }
+            GradientStop {
+                position: 1.0
+                color: "gray"
+            }
         }
     }
 
@@ -46,29 +52,37 @@ Item {
         anchors.right: handle.horizontalCenter
         anchors.top: backgroundBar.top
         anchors.bottom: backgroundBar.bottom
-        border.width: 1
+        border.width: 1 * DevicePixelRatio
         border.color: "#202020"
         gradient: Gradient {
-            GradientStop { position: 0.0; color: "#f0f0f0" }
-            GradientStop { position: 1.0; color: "#404040" }
+            GradientStop {
+                position: 0.0
+                color: "#f0f0f0"
+            }
+            GradientStop {
+                position: 1.0
+                color: "#404040"
+            }
         }
     }
 
     Item {
         id: handle
-        width: 80
+        width: 80 * DevicePixelRatio
         height: parent.height
         Image {
             anchors.centerIn: parent
-            source: "images/handle.png"
+            source: "qrc:/res/images/handle.png"
         }
         Image {
             id: handleHighlight
             anchors.centerIn: parent
-            source: "images/toggle.png"
+            source: "qrc:/res/images/toggle.png"
             opacity: mouseArea.pressed ? 0.6 : 0
             Behavior on opacity {
-                NumberAnimation { duration: 200 }
+                NumberAnimation {
+                    duration: 200
+                }
             }
         }
         MouseArea {
@@ -78,9 +92,9 @@ Item {
             drag.target: parent
             drag.axis: Drag.XAxis
             drag.minimumX: 2
-            drag.maximumX: root.xMax+2
+            drag.maximumX: root.xMax + 2
             onPositionChanged: {
-                value = (maximum - minimum) * (handle.x-2) / root.xMax + minimum;
+                value = (maximum - minimum) * (handle.x - 2) / root.xMax + minimum
             }
         }
     }

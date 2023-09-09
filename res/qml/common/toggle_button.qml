@@ -1,9 +1,9 @@
-import QtQuick 2.0
+import QtQuick 2.15
 
 Item {
     id: root
-    width: 112
-    height: 112
+    width: 112 * DevicePixelRatio
+    height: 112 * DevicePixelRatio
 
     property bool checked: false
     property alias icon: buttonIcon.source
@@ -13,16 +13,18 @@ Item {
     Image {
         id: handle
         anchors.verticalCenter: parent.verticalCenter
-        source: "images/handle.png"
+        source: "qrc:/res/images/handle.png"
     }
 
     Image {
         id: toggle
         anchors.centerIn: parent
-        source: "images/toggle.png"
+        source: "qrc:/res/images/toggle.png"
         opacity: checked ? 0.6 : 0
         Behavior on opacity {
-            NumberAnimation { duration: 200 }
+            NumberAnimation {
+                duration: 200
+            }
         }
     }
 
@@ -35,7 +37,7 @@ Item {
         anchors.fill: parent
         onClicked: {
             checked = !checked
-            root.toggled();
+            root.toggled()
         }
     }
 }
